@@ -1,0 +1,8 @@
+click==@latest	
+Flask==@latest
+Flask-PyMongo==@latest
+itsdangerous==@latest
+Jinja2==@latest
+MarkupSafe==@latest
+pymongo==@latest
+Werkzeug==@latest
