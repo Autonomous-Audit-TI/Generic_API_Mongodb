@@ -13,17 +13,11 @@ def mongo_auth(data):
     resp = None
     
     try:
-        conn = MongoClient()
-        resp = print("Conectado ao banco com sucesso!!!")
-    except Exception:
-        resp = traceback.print_exc()
-
-    try:
         resp =  collection.find_one({"key" : data[0]['key']})
         if resp:
             resp = True
         else:
-            resp = "No such name"
+            resp = "chave não existe"
     except Exception:
         resp = traceback.print_exc()
 

@@ -48,3 +48,49 @@
     }
 ]
 >>>>>>> 172a036 (Second commit)
+
+# app_mongodb And using the Key call one delet one POST [E.g. http://127.0.0.1:5000/mongo_delete_one ]
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+        "table_name": "tbl_clientes",
+        "col_name": "nome"
+    },
+    {
+        "word": "Jean Guilherme Galinhamo"
+    }
+]
+
+
+# app_mongodb And using the Key call  mongo_find_all  POST [E.g. http://127.0.0.1:5000/mongo_find_all]
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+        "table_name": "tbl_clientes"
+    }
+]
+
+
+# app_mongodb And using the Key call mongo_list_database_names POST [E.g. http://127.0.0.1:5000/mongo_list_database_names]
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc"
+    }
+]
+
+# app_mongodb And using the Key call mongo_search POST [E.g. http://127.0.0.1:5000/mongo_search]
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+        "table_name": "tbl_universal",
+        "col_name": "nome"
+    },
+    {
+        "word": "Alexandre"
+    }
+]
+
