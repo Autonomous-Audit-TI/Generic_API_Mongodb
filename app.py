@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
-from classMongo import insert_one, key_gen
-
+from classMongo import insert_one, key_gen, find_like
 
 app = Flask(__name__)
 
@@ -25,6 +24,12 @@ def mongo_insert_one():
   resp = insert_one(data)
   return jsonify(resp)
 
+@app.route('/mongo_search', methods=['POST'])
+def mongo_search():
+
+  data = request.get_json()
+  resp = find_like(data)
+  return resp
 
 if __name__ == '__main__':
     app.run(debug=True)

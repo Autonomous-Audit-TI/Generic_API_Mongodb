@@ -1,11 +1,12 @@
 from pymongo import MongoClient
+from flask import json, jsonify
 import secrets
 import traceback
 from auth import mongo_auth
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
-DB_NAME = 'local'
+DB_NAME = 'db_mongo'
 COLLECTION_NAME = 'tbl_universal'
 
 def key_gen():
@@ -45,7 +46,6 @@ def insert_one(data):
     if auth == True:
         try:
             conn = MongoClient()
-            print("Conectado com sucesso para inserção!!")
         except Exception:
             resp = traceback.print_exc()
 
@@ -60,3 +60,32 @@ def insert_one(data):
     connection.close()
     return resp
 
+def find_like(data):
+
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DB_NAME][data[0]['table_name']]
+    resp = None
+    list = []
+    auth = mongo_auth(data)
+
+    if auth == True:
+        try:
+            conn = MongoClient()
+        except Exception:
+            resp = traceback.print_exc()
+        try:
+            #AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
+            #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}  
+            myquery = { data[0]['col_name']: data[1]['word']} 
+            print(myquery)  
+            search = collection.find(myquery)
+            for x in search:
+                list.append(x)
+            resp = list
+        except Exception:
+            resp = traceback.print_exc()
+    else:
+        resp = {"resut": "chave invalida"}
+
+    connection.close()
+    return str(resp)

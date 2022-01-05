@@ -18,3 +18,20 @@
         "Proprietario":"0000 0000"
     }
 ]
+
+###########################################################################################################
+
+#Jan, 5 - 2022 - Jean Guilherme Galinhamo - 
+# Criação do modelo inicial baseado no brstm enviado por Alexandre Novaes Iosimura
+# Exemplo de chamada de pesquisa.
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+        "table_name": "tbl_universal",
+        "col_name": "nome"
+    },
+    {
+        "word": "Alexandre"
+    }
+]
