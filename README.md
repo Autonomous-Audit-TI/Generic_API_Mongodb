@@ -1,31 +1,6 @@
-<<<<<<< HEAD
-# Flask-Mongodb & Python 3
-**Simple build CRUD with Flask & Mongodb**
-
-## Requirment
-```
-	- pip3 install pipenv
-
-```
-
-## Usage
-```
-	- git clone https://github.com/robbyparlan/Flask-Mongodb.git && cd Flask-Mongodb
-	
-	- pipenv install -r requirment.txt
-	
-	- pipenv shell
-	
-	- python mongo.py
-
-```
-
-# app_mongodb
-# app_mongodb
-=======
 # Criadores do projeto em 02/01/2022
-# Alexandre Novaes Iosimura - alexandre.iosimura@gmail.com - +1 437 214 9458
-# Jean Guilherme Galinhamo - Gui.jean5323@gmail.com - +55 14 99815-7565
+# Alexandre Novaes Iosimura - alexandre.iosimura@gmail.com 
+# Jean Guilherme Galinhamo - Gui.jean5323@gmail.com
 #  -------------------------------------------------------------------------------------
 # Flask-Mongodb & Python 3 - API - MONGODB - Self Managed by Front-end calls
 # ######################################################################################
