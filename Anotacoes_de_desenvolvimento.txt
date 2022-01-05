@@ -1,6 +1,6 @@
 #Jan, 4 - 2022 - Jean Guilherme Galinhamo - 
 # Criação do modelo inicial baseado no brstm enviado por Alexandre Novaes Iosimura
-#Jan, 4 - 2022 - Alexandre NOvaes Iosimura
+#Jan, 4 - 2022 - Alexandre Novaes Iosimura
 #Tradução de algumas mensagens, teste do modelo e orientação sobre nova classe UPD/DEL/SEARCH [Type 1/10]
 #Jan, 5 - Previsão de criação das classes faltantes no CRUD 
 # Exemplo de chamada de inserção, criação da tabela caso não exista, criação dos campos caso não exista e 
