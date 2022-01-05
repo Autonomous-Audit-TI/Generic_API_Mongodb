@@ -1,6 +1,7 @@
 # Criadores do projeto em 02/01/2022
 # Alexandre Novaes Iosimura - alexandre.iosimura@gmail.com 
 # Jean Guilherme Galinhamo - Gui.jean5323@gmail.com
+# git clone https://github.com/Autonomous-Audit-TI/Generic_API_Mongodb
 #  -------------------------------------------------------------------------------------
 # Flask-Mongodb & Python 3 - API - MONGODB - Self Managed by Front-end calls
 # ######################################################################################
@@ -15,7 +16,7 @@
 
 ## Usage (Generic)
 ```
-	- git clone https://github.com/robbyparlan/Flask-Mongodb.git && cd Flask-Mongodb
+	- git clone https://github.com/Autonomous-Audit-TI/Generic_API_Mongodb
 	- pipenv install -r requirment.txt
 	- pipenv shell
 	- python app.py
