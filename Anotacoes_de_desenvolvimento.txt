@@ -13,8 +13,8 @@
     },
     {
         "Nome_Completo": "Alexandre Novaes Iosimura",
-        "Telefone": "+1 (437) 214 9458",
+        "Telefone": "+0 (000) 000 00",
         "Endereco": "East York - Toronto - ON",
-        "Proprietario":"Karina Adelle"
+        "Proprietario":"0000 0000"
     }
 ]
