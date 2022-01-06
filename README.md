@@ -23,7 +23,7 @@
 
 ```
 
-# app_mongodb Send first by GET ( E.g. http://127.0.0.1:5000/mongo_login) 
+# app_mongodb Send it first and GET your key ( E.g. http://127.0.0.1:5000/mongo_login) 
 # Wait for this return:
 
 {
