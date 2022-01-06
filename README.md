@@ -30,7 +30,7 @@
     "key": "Qw14lrkm7ooupXwwRNQKz0bcrAW2EB95lTWbkmjiIRk"
 }
 
-# app_mongodb And using the Key call one insert POST [E.g. http://127.0.0.1:5000/mongo_insert_one ]
+# app_mongodb Using the Key to call one insert POST [E.g. http://127.0.0.1:5000/mongo_insert_one ]
 [
     {
         "key": "Qw14lrkm7ooupXwwRNQKz0bcrAW2EB95lTWbkmjiIRk",
@@ -49,7 +49,7 @@
 ]
 >>>>>>> 172a036 (Second commit)
 
-# app_mongodb And using the Key call one delet one POST [E.g. http://127.0.0.1:5000/mongo_delete_one ]
+# app_mongodb Using the Key to call one delet one POST [E.g. http://127.0.0.1:5000/mongo_delete_one ]
 
 [
     {
@@ -63,7 +63,7 @@
 ]
 
 
-# app_mongodb And using the Key call  mongo_find_all  POST [E.g. http://127.0.0.1:5000/mongo_find_all]
+# app_mongodb Using the Key  to call  mongo_find_all  POST [E.g. http://127.0.0.1:5000/mongo_find_all]
 
 [
     {
@@ -73,7 +73,7 @@
 ]
 
 
-# app_mongodb And using the Key call mongo_list_database_names POST [E.g. http://127.0.0.1:5000/mongo_list_database_names]
+# app_mongodb Using the Key to call mongo_list_database_names POST [E.g. http://127.0.0.1:5000/mongo_list_database_names]
 
 [
     {
@@ -81,7 +81,7 @@
     }
 ]
 
-# app_mongodb And using the Key call mongo_search POST [E.g. http://127.0.0.1:5000/mongo_search]
+# app_mongodb Using the Key to call mongo_search POST [E.g. http://127.0.0.1:5000/mongo_search]
 
 [
     {
@@ -94,3 +94,4 @@
     }
 ]
 
+<img href='https://github.com/Autonomous-Audit-TI/Generic_API_Mongodb/blob/main/logo.png'>
