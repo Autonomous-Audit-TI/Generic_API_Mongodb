@@ -94,4 +94,4 @@
     }
 ]
 
-<img href='https://github.com/Autonomous-Audit-TI/Generic_API_Mongodb/blob/main/logo.png'>
+<img src='https://github.com/Autonomous-Audit-TI/Generic_API_Mongodb/blob/main/logo.png'>
