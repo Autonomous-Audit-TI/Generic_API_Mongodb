@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from classMongo import insert_one, key_gen, find_like, list_database_names, delete_one, find_all
+from classMongo import insert_one, key_gen, find_like, list_database_names, delete_one, find_all, update_one
 
 app = Flask(__name__)
 
@@ -36,6 +36,12 @@ def mongo_search():
 
   data = request.get_json()
   resp = find_like(data)
+  return resp
+
+@app.route('/mongo_update', methods=['POST'])
+def mongo_update_one():
+  data = request.get_json()
+  resp = update_one(data)
   return resp
 
 @app.route('/mongo_find_all', methods=['POST'])

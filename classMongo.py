@@ -98,8 +98,9 @@ def find_like(data):
     if auth == True:
         try:
             #AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
-            #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}  
-            myquery = { data[0]['col_name']: data[1]['word']} 
+            #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}
+            temp="/^"+data[1]['word']+"/" 
+            myquery = { data[0]['col_name']: temp} 
             print(myquery)  
             search = collection.find(myquery)
             for x in search:
@@ -134,3 +135,25 @@ def find_all(data):
 
     close_conection(connection)
     return str(resp)
+
+
+def update_one(data):
+    connection = open_conection()
+    collection = connection['db_mongo'][data[0]['table_name']]
+    resp = None
+    auth = mongo_auth(data)
+    if auth == True:
+        try:
+            filter = { data[0]['col_name']: data[1]['word']}
+            update = { "$set": {data[2]['key']:data[2]["new_value"]}} 
+            print(filter)
+            print(update)
+            collection.update_one(filter,update)
+            resp = {"resut": "OK"}
+        except Exception:
+            resp = traceback.print_exc()
+    else:
+        resp = auth
+
+    close_conection(connection)
+    return resp
