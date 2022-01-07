@@ -96,3 +96,6 @@
 ]
 
 <img src='https://github.com/Autonomous-Audit-TI/Generic_API_Mongodb/blob/main/logo.png'>
+
+
+# app_mongodb added logging functionality in new table "log" on delete_one and insert_one queries
