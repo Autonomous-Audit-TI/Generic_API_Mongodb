@@ -85,9 +85,9 @@
 
 [
     {
-        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
-        "table_name": "tbl_universal",
-        "col_name": "nome"
+        "key": "rFWwOWACa3T82DqLTb-VLmZGm4on37OV085_Dw6yE0Y",
+        "table_name": "tbl_clientes",
+        "col_name": "Nome_Completo"
     },
     {
         "word": "Alexandre"
