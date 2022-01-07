@@ -1,8 +1,8 @@
-click==@latest	
-Flask==@latest
-Flask-PyMongo==@latest
-itsdangerous==@latest
-Jinja2==@latest
-MarkupSafe==@latest
-pymongo==@latest
-Werkzeug==@latest
+click==8.0.3	
+Flask==2.0.2
+Flask-PyMongo==2.3.0
+itsdangerous==2.0.1
+Jinja2==3.0.3
+MarkupSafe==2.0.1
+pymongo==4.0.1
+Werkzeug==2.0.2
