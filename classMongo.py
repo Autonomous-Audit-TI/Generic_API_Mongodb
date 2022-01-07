@@ -99,8 +99,26 @@ def find_like(data):
         try:
             #AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
             #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}
-            temp="/^"+data[1]['word']+"/" 
-            myquery = { data[0]['col_name']: temp} 
+            #Alexandre Novaes Iosimura - Search using regex to support LIKE argument - Solved
+            ##################################################################################
+            #temp="/^"+data[1]['word']+"/" 
+            # # use $options:'i' to make the query case-insensitive
+            # # Ref.: https://kb.objectrocket.com/mongo-db/how-to-query-mongodb-documents-with-regex-in-python-362
+            # use $regex to find docs that start with case-sensitive letter "object"
+            # Examples:
+            # query = { "field": { "$regex": 'obje.*' } }
+            # docs = col.count_documents( query )
+            # print ("query:", query)
+            # print ("$regex using '.___*' -- total:", docs, "\n")
+
+            # # the query between the ^ and $ char are for finding exact matches
+            # query = { "field": { "$regex": '^ObjectRocket 2$' } }
+            # docs = col.count_documents( query )
+            # print ("query:", query)
+            # print ("$regex using '^___$' -- total:", docs, "\n")
+            # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+            
+            myquery = { data[0]['col_name']: { "$regex": data[1]['word'], "$options" :'i' } }
             print(myquery)  
             search = collection.find(myquery)
             for x in search:
