@@ -97,10 +97,11 @@ def find_like(data):
 
     if auth == True:
         try:
-            #Jena - 04-01-2022 : AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
+            # 04-01-2022 - Jean Guilherme
+            # AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
             #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}
             
-            
+            #################################################################################
             #Alexandre Novaes Iosimura - Search using regex to support LIKE argument - Solved
             ##################################################################################
             #temp="/^"+data[1]['word']+"/" 
