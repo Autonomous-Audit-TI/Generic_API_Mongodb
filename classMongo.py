@@ -97,6 +97,7 @@ def find_like(data):
 
     if auth == True:
         try:
+            ################################################################################
             # 04-01-2022 - Jean Guilherme
             # AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
             #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}
