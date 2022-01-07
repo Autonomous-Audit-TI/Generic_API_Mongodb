@@ -97,11 +97,24 @@ def find_like(data):
 
     if auth == True:
         try:
-            #AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
+            #Jena - 04-01-2022 : AQUI NÃO ESTA FUNCIONANDO COM O LIKE. ACHO QUE É SINTAX INCORRETA /.* TEXTO .*/
             #myquery = { data[0]['col_name']: '/.*'+ data[1]['word'] +'.*/'}
+            
+            
             #Alexandre Novaes Iosimura - Search using regex to support LIKE argument - Solved
             ##################################################################################
             #temp="/^"+data[1]['word']+"/" 
+            # Troubleshooting after pip3 install bson : the application broke, then:
+            # I think the reason is I install pymongo and then install bson. Then I uninstall bson. Then I got this problem.
+            # pip freeze pymongo it requires Nothing.
+            # So maybe it has its own bson package.
+            # What I solve this problem:
+            # pip uninstall pymongo
+            # pip uninstall bson
+            # and then reinstall pymongo
+            # pip install pymongo
+            ############ SOLVED ######################################
+            # Lets get ahead: using Regex
             # # use $options:'i' to make the query case-insensitive
             # # Ref.: https://kb.objectrocket.com/mongo-db/how-to-query-mongodb-documents-with-regex-in-python-362
             # use $regex to find docs that start with case-sensitive letter "object"
