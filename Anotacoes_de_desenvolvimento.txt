@@ -22,8 +22,7 @@
 ###########################################################################################################
 
 #Jan, 5 - 2022 - Jean Guilherme Galinhamo - 
-# Criação do modelo inicial baseado no brstm enviado por Alexandre Novaes Iosimura
-# Exemplo de chamada de pesquisa.
+# Exemplo de chamada de pesquisa like.
 
 [
     {
@@ -35,3 +34,39 @@
         "word": "Alexandre"
     }
 ]
+
+#Jan, 5 - 2022 - Jean Guilherme Galinhamo - 
+# Exemplo de chamada de get all.
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+        "table_name": "tbl_clientes"
+    }
+]
+
+
+#Jan, 5 - 2022 - Jean Guilherme Galinhamo - 
+# Exemplo de chamada de lista de dbs e collections.
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+    }
+]
+
+
+#Jan, 5 - 2022 - Jean Guilherme Galinhamo - 
+# Exemplo de chamada delete one.
+
+[
+    {
+        "key": "ECbO0ozhPdueFVCKnsGRzOsiUhRVseDikQY2vdFqFwc",
+        "table_name": "tbl_clientes",
+        "col_name": "nome"
+    },
+    {
+        "word": "Jean Guilherme Galinhamo"
+    }
+]
+
