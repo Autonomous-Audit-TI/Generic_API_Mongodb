@@ -4,6 +4,34 @@ import traceback
 from auth import mongo_auth
 from mongo_conn import open_conection, close_conection
 
+def dump_log(sp,data):
+    connection = open_conection()
+    collection = connection['db_mongo']["log"]
+    collection1 = connection['db_mongo'][data[0]['table_name']]
+
+    resp = None
+    auth = mongo_auth(data)
+
+    if auth == True:
+        try:
+            arr=[]
+            data=collection1.find()
+            for x in data:
+                arr.append(x)
+            
+            
+            rec_1 = collection.insert_one({sp:arr})
+            resp = {"resut": "OK"}
+        except Exception:
+            resp = traceback.print_exc()
+    else:
+        resp = auth
+
+    close_conection(connection)
+    return resp
+
+
+
 def key_gen():
 
     connection = open_conection()
@@ -48,6 +76,8 @@ def list_database_names(data):
 
 def insert_one(data):
 
+    dump_log("Insert",data)
+
     connection = open_conection()
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
@@ -66,7 +96,7 @@ def insert_one(data):
     return resp
 
 def delete_one(data):
-
+    dump_log("Delete",data)
     connection = open_conection()
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
@@ -88,7 +118,6 @@ def delete_one(data):
 
 
 def find_like(data):
-
     connection = open_conection()
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
