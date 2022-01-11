@@ -1,10 +1,59 @@
+from os import close
 from pymongo import MongoClient
+from datetime import date, datetime
 import secrets
 import traceback
 from auth import mongo_auth
 from mongo_conn import open_conection, close_conection
 
-def key_gen():
+def dump_log(sp,data):
+    connection = open_conection()
+    collection = connection['db_mongo']["log"]
+    collection1 = connection['db_mongo'][data[0]['table_name']]
+
+    resp = None
+    auth = mongo_auth(data)
+
+    if auth == True:
+        try:
+            arr=[]
+            data=collection1.find()
+            for x in data:
+                arr.append(x)
+            
+            
+            rec_1 = collection.insert_one({sp:arr})
+            resp = {"resut": "OK"}
+        except Exception:
+            resp = traceback.print_exc()
+    else:
+        resp = auth
+
+    close_conection(connection)
+    return resp
+
+def log_key_gen(data):
+    connection = open_conection()
+    collection = connection["db_mongo"]["log"]
+
+    resp = None
+    dateNow = datetime.now()
+    dateNow = dateNow.date()
+    try:
+        collection.insert_one({ 
+            "key" : data["key"], 
+            "table_name" : data["table_name"], 
+            "IP" : data["ip_addr"],
+            "last_modified" : str(dateNow)
+        })
+        resp = { "result" : "OK" }
+    except Exception:
+        resp = traceback.print_exc()
+
+    close_conection(connection)
+    return resp
+
+def key_gen(ip):
 
     connection = open_conection()
     collection = connection['db_autentic']['tbl_user']
@@ -12,14 +61,22 @@ def key_gen():
     
     try:
         str_Key = secrets.token_urlsafe()
-        print('i gen key', str_Key)
+        collectionUsers = connection['db_users'][f"tbl_{str_Key}"]
+        # print('i gen key', str_Key)
         collection.insert_one({"key": str_Key,
                                 "permit_expired": "",
                                 "permit_insert": True,
                                 "permit_update": True,
                                 "permit_delete": True,
                                 "permit_search": True})
-        resp = {"key": str_Key}
+        collectionUsers.insert_one({"key": str_Key,
+                                "permit_expired": "",
+                                "permit_insert": True,
+                                "permit_update": True,
+                                "permit_delete": True,
+                                "permit_search": True})
+        log_key_gen({ "key" : str_Key, "table_name" : f"tbl_{str_Key}", "ip_addr" : ip })
+        resp = {"key": str_Key, "table_name": f"tbl_{str_Key}"}
         print(resp)
     except Exception:
         resp = traceback.print_exc()
@@ -50,31 +107,49 @@ def list_database_names(data):
 
 def insert_one(data):
 
+    dump_log("Insert",data)
+
     connection = open_conection()
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
     auth = mongo_auth(data)
+    database = connection['db_users']
+    tableExists = False
 
-    if auth == True:
+    if f"tbl_{data[0]['key']}" in database.list_collection_names():
+        tableExists = True
+
+    if auth == True and tableExists == True:
         try:
             rec_1 = collection.insert_one(data[1])
             resp = {"resut": "OK"}
         except Exception:
             resp = traceback.print_exc()
     else:
-        resp = auth
+        if auth == "chave não existe":
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        elif tableExists:
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        else:
+            resp = {"message" : f"Table tbl_{data[0]['key']} does not exist"}
+
 
     close_conection(connection)
     return resp
 
 def delete_one(data):
-
+    dump_log("Delete",data)
     connection = open_conection()
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
     auth = mongo_auth(data)
+    database = connection['db_users']
+    tableExists = False
 
-    if auth == True:
+    if f"tbl_{data[0]['key']}" in database.list_collection_names():
+        tableExists = True
+
+    if auth == True and tableExists == True:
         try:
             myquery = { data[0]['col_name']: data[1]['word']} 
             print(myquery)
@@ -83,14 +158,18 @@ def delete_one(data):
         except Exception:
             resp = traceback.print_exc()
     else:
-        resp = auth
+        if auth == "chave não existe":
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        elif tableExists:
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        else:
+            resp = {"message" : f"Table tbl_{data[0]['key']} does not exist"}
 
     close_conection(connection)
     return resp
 
 
 def find_like(data):
-
     connection = open_conection()
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None

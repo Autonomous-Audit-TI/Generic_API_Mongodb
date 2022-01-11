@@ -1,9 +1,5 @@
 from flask import Flask, jsonify, request
-<<<<<<< HEAD
-from classMongo import delete_one, insert_client, insert_one, key_gen, find_like
-=======
 from classMongo import insert_one, key_gen, find_like, list_database_names, delete_one, find_all, update_one
->>>>>>> 05cbabd297da5c2f7ef5803aec4c2e2eca52ee02
 
 app = Flask(__name__)
 
@@ -17,7 +13,8 @@ def logo_print():
 @app.route('/mongo_login', methods=['GET'])
 def mongo_login():
 
-    resp = key_gen()
+    str_IP = request.remote_addr
+    resp = key_gen(str_IP)
     return jsonify(resp)
 
 
