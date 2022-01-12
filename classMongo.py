@@ -6,6 +6,22 @@ import traceback
 from auth import mongo_auth
 from mongo_conn import open_conection, close_conection
 
+adminKey = "admin_admin"
+
+# checks if the table name exists for the user
+def check_table_exists(conn, tableName):
+    database = conn['db_mongo']
+    if tableName in database.list_collection_names():
+        return True
+    return False
+
+#checks if the key provided is an admin key
+def check_admin_key(key):
+    if key == adminKey:
+        return True
+    return False
+
+# dumps the previous data before 
 def dump_log(sp,data):
     connection = open_conection()
     collection = connection['db_mongo']["log"]
@@ -61,7 +77,7 @@ def key_gen(ip):
     
     try:
         str_Key = secrets.token_urlsafe()
-        collectionUsers = connection['db_users'][f"tbl_{str_Key}"]
+        collectionUsers = connection['db_mongo'][f"tbl_{str_Key}"]
         # print('i gen key', str_Key)
         collection.insert_one({"key": str_Key,
                                 "permit_expired": "",
@@ -90,8 +106,10 @@ def list_database_names(data):
     resp = None
     list = []
     auth = mongo_auth(data)
+    # tableExists = check_table_exists(connection, f"tbl_{data[0]['key']}")
+    isAdmin = check_admin_key(data[0]['key'])
 
-    if auth == True:
+    if auth == True and isAdmin:
         try:
             d = dict((db, [collection for collection in connection[db].list_collection_names()])
                 for db in connection.list_database_names())
@@ -100,7 +118,13 @@ def list_database_names(data):
         except Exception:
             resp = traceback.print_exc()
     else:
-        resp = auth
+        if auth == "chave não existe":
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        # elif tableExists:
+        #     resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        else:
+            resp = {"message" : f"Table tbl_{data[0]['key']} does not exist"}
+        # resp = auth
 
     close_conection(connection)
     return str(resp)
@@ -113,13 +137,10 @@ def insert_one(data):
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
     auth = mongo_auth(data)
-    database = connection['db_users']
-    tableExists = False
+    tableExists = check_table_exists(connection, data[0]['table_name'])
+    isAdmin = check_admin_key(data[0]['key'])
 
-    if f"tbl_{data[0]['key']}" in database.list_collection_names():
-        tableExists = True
-
-    if auth == True and tableExists == True:
+    if auth == True and tableExists == True or isAdmin:
         try:
             rec_1 = collection.insert_one(data[1])
             resp = {"resut": "OK"}
@@ -143,13 +164,10 @@ def delete_one(data):
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
     auth = mongo_auth(data)
-    database = connection['db_users']
-    tableExists = False
+    tableExists = check_table_exists(connection, data[0]['table_name'])
+    isAdmin = check_admin_key(data[0]['key'])
 
-    if f"tbl_{data[0]['key']}" in database.list_collection_names():
-        tableExists = True
-
-    if auth == True and tableExists == True:
+    if auth == True and tableExists == True or isAdmin:
         try:
             myquery = { data[0]['col_name']: data[1]['word']} 
             print(myquery)
@@ -175,8 +193,10 @@ def find_like(data):
     resp = None
     list = []
     auth = mongo_auth(data)
+    tableExists = check_table_exists(connection, data[0]['table_name'])
+    isAdmin = check_admin_key(data[0]['key'])
 
-    if auth == True:
+    if auth == True and tableExists == True or isAdmin:
         try:
             ################################################################################
             # 04-01-2022 - Jean Guilherme
@@ -223,7 +243,13 @@ def find_like(data):
         except Exception:
             resp = traceback.print_exc()
     else:
-        resp = auth
+        if auth == "chave não existe":
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        elif tableExists:
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        else:
+            resp = {"message" : f"Table tbl_{data[0]['key']} does not exist"}
+        # resp = auth
 
     close_conection(connection)
     return str(resp)
@@ -235,8 +261,10 @@ def find_all(data):
     resp = None
     list = []
     auth = mongo_auth(data)
+    tableExists = check_table_exists(connection, data[0]['table_name'])
+    isAdmin = check_admin_key(data[0]['key'])
 
-    if auth == True:
+    if auth == True and tableExists == True or isAdmin:
         try:
             search = collection.find()
             for x in search:
@@ -245,7 +273,13 @@ def find_all(data):
         except Exception:
             resp = traceback.print_exc()
     else:
-        resp = auth
+        if auth == "chave não existe":
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        elif tableExists:
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        else:
+            resp = {"message" : f"Table tbl_{data[0]['key']} does not exist"}
+        # resp = auth
 
     close_conection(connection)
     return str(resp)
@@ -256,7 +290,10 @@ def update_one(data):
     collection = connection['db_mongo'][data[0]['table_name']]
     resp = None
     auth = mongo_auth(data)
-    if auth == True:
+    tableExists = check_table_exists(connection, data[0]['table_name'])
+    isAdmin = check_admin_key(data[0]['key'])
+
+    if auth == True and tableExists == True or isAdmin:
         try:
             filter = { data[0]['col_name']: data[1]['word']}
             update = { "$set": {data[2]['key']:data[2]["new_value"]}} 
@@ -267,7 +304,13 @@ def update_one(data):
         except Exception:
             resp = traceback.print_exc()
     else:
-        resp = auth
+        if auth == "chave não existe":
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        elif tableExists:
+            resp = {"message" : f"Key {data[0]['key']} does not exist"}
+        else:
+            resp = {"message" : f"Table tbl_{data[0]['key']} does not exist"}
+        # resp = auth
 
     close_conection(connection)
     return resp

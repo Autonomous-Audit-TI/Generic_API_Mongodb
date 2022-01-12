@@ -99,3 +99,52 @@
 
 #
 # app_mongodb added logging functionality in new table "log" on delete_one and insert_one queries
+
+# Now since the user table will be generated on key generate, user would use the key and table name to do operations
+
+# Suppose we get this when hit mongo_login
+{
+  "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8", 
+  "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"
+}
+
+>> LETS INSERT ONE
+# Using the Key and Table Name to call insert one POST [E.g. http://127.0.0.1:5000/mongo_insert_one ]
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"
+    },
+    {
+        "Nome_Completo": "Osama Nadeem",
+        "Telefone": "+923189143495",
+        "Endereco": "Lahore, Pakistan",
+        "Proprietario":"$$$$ $$$$"
+    }
+]
+
+>> LETS DELETE ONE
+# Using the Key, Table Name and Column Name to call delete one POST [E.g. http://127.0.0.1:5000/mongo_delete_one ]
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "col_name": "Nome_Completo"
+    },
+    {
+        "word": "Osama Nadeem"
+    }
+]
+
+>> LETS FIND LIKE
+# Using the Key, Table Name and Column Name to call find like POST [E.g. http://127.0.0.1:5000/mongo_search ]
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "col_name": "Nome_Completo"
+    },
+    {
+        "word": "oSAMA"
+    }
+]

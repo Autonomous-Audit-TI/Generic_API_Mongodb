@@ -70,3 +70,73 @@
     }
 ]
 
+
+------ NEW NOTES -------
+#Jan, 12 - 2022 - Osama
+#Example insert one
+#Now since the user table will be generated on key generate, user would
+#use the key and table name to do operations
+
+#Suppose I get this when I hit mongo_login
+{
+  "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8", 
+  "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"
+}
+
+>> LETS INSERT ONE
+
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"
+    },
+    {
+        "Nome_Completo": "Osama Nadeem",
+        "Telefone": "+923189143495",
+        "Endereco": "Lahore, Pakistan",
+        "Proprietario":"$$$$ $$$$"
+    }
+]
+
+>> LETS DELETE ONE
+
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "col_name": "Nome_Completo"
+    },
+    {
+        "word": "Osama Nadeem"
+    }
+]
+
+>> LETS FIND LIKE
+
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "col_name": "Nome_Completo"
+    },
+    {
+        "word": "oSAMA"
+    }
+]
+
+>> LETS GET ALL
+
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8",
+        "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"
+    }
+]
+
+>> LETS GET DATABASE NAMES
+
+[
+    {
+        "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"
+    }
+]
