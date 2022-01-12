@@ -100,9 +100,9 @@
 #
 # app_mongodb added logging functionality in new table "log" on delete_one and insert_one queries
 
-# Now since the user table will be generated on key generate, user would use the key and table name to do operations
+# Now since the user table will be generated on key generate, user would use the key and table name to do operations if he has the access key
 
-# Suppose we get this when hit mongo_login
+# Suppose we get this when hit mongo_login with POST { "key" : "access key here" }
 {
   "key": "4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8", 
   "table_name": "tbl_4U4a2vavN-MVC2zBvs6XFx0GS-OMhVZPqrgXG6wfba8"

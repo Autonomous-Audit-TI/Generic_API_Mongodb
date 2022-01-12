@@ -10,11 +10,12 @@ def logo_print():
     lines = f.readlines()
   return jsonify(lines)
   
-@app.route('/mongo_login', methods=['GET'])
+@app.route('/mongo_login', methods=['POST'])
 def mongo_login():
 
     str_IP = request.remote_addr
-    resp = key_gen(str_IP)
+    access_key = request.get_json()
+    resp = key_gen(str_IP, access_key)
     return jsonify(resp)
 
 

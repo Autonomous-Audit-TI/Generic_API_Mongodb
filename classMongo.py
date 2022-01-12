@@ -69,33 +69,36 @@ def log_key_gen(data):
     close_conection(connection)
     return resp
 
-def key_gen(ip):
-
+def key_gen(ip, key):
+    
     connection = open_conection()
     collection = connection['db_autentic']['tbl_user']
     resp = None
     
-    try:
-        str_Key = secrets.token_urlsafe()
-        collectionUsers = connection['db_mongo'][f"tbl_{str_Key}"]
-        # print('i gen key', str_Key)
-        collection.insert_one({"key": str_Key,
-                                "permit_expired": "",
-                                "permit_insert": True,
-                                "permit_update": True,
-                                "permit_delete": True,
-                                "permit_search": True})
-        collectionUsers.insert_one({"key": str_Key,
-                                "permit_expired": "",
-                                "permit_insert": True,
-                                "permit_update": True,
-                                "permit_delete": True,
-                                "permit_search": True})
-        log_key_gen({ "key" : str_Key, "table_name" : f"tbl_{str_Key}", "ip_addr" : ip })
-        resp = {"key": str_Key, "table_name": f"tbl_{str_Key}"}
-        print(resp)
-    except Exception:
-        resp = traceback.print_exc()
+    if key[0]['key'] == "admin_admin":
+        try:
+            str_Key = secrets.token_urlsafe()
+            collectionUsers = connection['db_mongo'][f"tbl_{str_Key}"]
+            # print('i gen key', str_Key)
+            collection.insert_one({"key": str_Key,
+                                    "permit_expired": "",
+                                    "permit_insert": True,
+                                    "permit_update": True,
+                                    "permit_delete": True,
+                                    "permit_search": True})
+            collectionUsers.insert_one({"key": str_Key,
+                                    "permit_expired": "",
+                                    "permit_insert": True,
+                                    "permit_update": True,
+                                    "permit_delete": True,
+                                    "permit_search": True})
+            log_key_gen({ "key" : str_Key, "table_name" : f"tbl_{str_Key}", "ip_addr" : ip })
+            resp = {"key": str_Key, "table_name": f"tbl_{str_Key}"}
+            print(resp)
+        except Exception:
+            resp = traceback.print_exc()
+    else:
+        resp = { "message" : "Provide an access key to generate your key and table" }
 
     close_conection(connection)
     return resp
