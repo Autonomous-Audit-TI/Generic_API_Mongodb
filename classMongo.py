@@ -6,7 +6,7 @@ import traceback
 from auth import mongo_auth
 from mongo_conn import open_conection, close_conection
 
-adminKey = "admin_admin"
+adminKey = "IgUJRhIIO@qdzBHS68udS#Omlz*jclBbosN$S4uUQZbGT#G16p"
 
 # checks if the table name exists for the user
 def check_table_exists(conn, tableName):
